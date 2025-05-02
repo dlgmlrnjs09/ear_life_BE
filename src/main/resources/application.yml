@@ -1,0 +1,19 @@
+external:
+  data-portal:
+    encoding-key: NbGJxfHOYNHFJ3d%2FM4bKtX0kK7oUhVSKy63ht%2BtzF1PpCyMshJWP0hh2ia6O%2Fnrs6bPsP8eKBNX%2BaiHdUCKMBg%3D%3D
+    decoding-key: NbGJxfHOYNHFJ3d/M4bKtX0kK7oUhVSKy63ht+tzF1PpCyMshJWP0hh2ia6O/nrs6bPsP8eKBNX+aiHdUCKMBg==
+
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/earlife
+    username: postgres
+    password: gmlrnjs0
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+        dialect: org.hibernate.dialect.PostgreSQLDialect
