@@ -2,8 +2,6 @@ package com.earlife.apartment.main.external.api.dataportal.dto;
 
 import com.earlife.apartment.main.domain.api.apartment.entity.ApartmentMaster;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import jakarta.persistence.Column;
-import jakarta.persistence.Id;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
@@ -12,7 +10,7 @@ import lombok.Setter;
 @Setter
 @Builder
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class ApartmentDto {
+public class ApartmentMasterDto {
     private String kaptCode;
     private String kaptName;
     private String as1;

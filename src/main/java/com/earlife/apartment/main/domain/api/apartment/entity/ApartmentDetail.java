@@ -32,7 +32,7 @@ public class ApartmentDetail {
     private String codeMgr;  // 일반관리방식
 
     @Column(name = "kapt_mgr_cnt")
-    private Integer kaptMgrCnt;  // 일반관리인원
+    private Double kaptMgrCnt;  // 일반관리인원
 
     @Column(name = "kapt_ccompany", length = 100)
     private String kaptCcompany;  // 일반관리 계약업체
@@ -41,7 +41,7 @@ public class ApartmentDetail {
     private String codeSec;  // 경비관리방식
 
     @Column(name = "kaptd_scnt")
-    private Integer kaptdScnt;  // 경비관리인원
+    private Double kaptdScnt;  // 경비관리인원
 
     @Column(name = "kaptd_sec_com", length = 100)
     private String kaptdSecCom;  // 경비관리 계약업체
@@ -50,7 +50,7 @@ public class ApartmentDetail {
     private String codeClean;  // 청소관리방식
 
     @Column(name = "kaptd_clcnt")
-    private Integer kaptdClcnt;  // 청소관리인원
+    private Double kaptdClcnt;  // 청소관리인원
 
     @Column(name = "code_garbage", length = 20)
     private String codeGarbage;  // 음식물처리방법
@@ -61,14 +61,14 @@ public class ApartmentDetail {
     @Column(name = "kaptd_dcnt")
     private Integer kaptdDcnt;  // 소독관리 연간 소독횟수
 
-    @Column(name = "disposal_type", length = 50)
+    @Column(name = "disposal_type", length = 200)
     private String disposalType;  // 소독방법
 
     @Column(name = "code_str", length = 20)
     private String codeStr;  // 건물구조
 
     @Column(name = "kaptd_ecapa")
-    private Integer kaptdEcapa;  // 수전용량
+    private Double kaptdEcapa;  // 수전용량
 
     @Column(name = "code_econ", length = 20)
     private String codeEcon;  // 세대전기계약방식
@@ -98,21 +98,21 @@ public class ApartmentDetail {
     private String codeNet;  // 주차관제.홈네트워크
 
     @Column(name = "kaptd_cccnt")
-    private Integer kaptdCccnt;  // CCTV대수
+    private Double kaptdCccnt;  // CCTV대수
 
     @Column(name = "welfare_facility", columnDefinition = "TEXT")
     private String welfareFacility;  // 부대.복리시설
 
-    @Column(name = "kaptd_wtimebus", length = 50)
+    @Column(name = "kaptd_wtimebus", length = 200)
     private String kaptdWtimebus;  // 버스정류장 거리
 
-    @Column(name = "subway_line", length = 50)
+    @Column(name = "subway_line", length = 200)
     private String subwayLine;  // 지하철호선
 
-    @Column(name = "subway_station", length = 50)
+    @Column(name = "subway_station", length = 200)
     private String subwayStation;  // 지하철역명
 
-    @Column(name = "kaptd_wtimesub", length = 50)
+    @Column(name = "kaptd_wtimesub", length = 200)
     private String kaptdWtimesub;  // 지하철역 거리
 
     @Column(name = "convenient_facility", columnDefinition = "TEXT")
@@ -122,13 +122,13 @@ public class ApartmentDetail {
     private String educationFacility;  // 교육시설
 
     @Column(name = "ground_el_charger_cnt")
-    private Integer groundElChargerCnt;  // 지상 전기차 충전대수
+    private Double groundElChargerCnt;  // 지상 전기차 충전대수
 
     @Column(name = "underground_el_charger_cnt")
-    private Integer undergroundElChargerCnt;  // 지하 전기차 충전대수
+    private Double undergroundElChargerCnt;  // 지하 전기차 충전대수
 
-    @OneToOne(fetch = FetchType.LAZY)
+    /*@OneToOne(fetch = FetchType.LAZY)
     @MapsId
     @JoinColumn(name = "kapt_code")
-    private ApartmentMaster apartmentMaster;
+    private ApartmentMaster apartmentMaster;*/
 }

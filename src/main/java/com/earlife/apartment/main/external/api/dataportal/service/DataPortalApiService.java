@@ -1,8 +1,8 @@
 package com.earlife.apartment.main.external.api.dataportal.service;
 
-import com.earlife.apartment.main.external.api.dataportal.config.DataPortalWebClient;
+import com.earlife.apartment.main.external.api.dataportal.dto.ApartmentBasicDto;
 import com.earlife.apartment.main.external.api.dataportal.dto.ApartmentDetailDto;
-import com.earlife.apartment.main.external.api.dataportal.dto.ApartmentDto;
+import com.earlife.apartment.main.external.api.dataportal.dto.ApartmentMasterDto;
 import com.earlife.apartment.main.external.api.dataportal.dto.DataPortalResponseDto;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
@@ -13,9 +13,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 
 import java.util.List;
-import java.util.Map;
-import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Slf4j
 @Service
@@ -30,7 +27,7 @@ public class DataPortalApiService {
     private final WebClient defaultDataPortalWebClient;
     private final ObjectMapper objectMapper;
 
-    public List<ApartmentDto> getAllAptList(int pageNo, int pageSize) {
+    public List<ApartmentMasterDto> getAllAptList(int pageNo, int pageSize) {
         DataPortalResponseDto<Object> response = defaultDataPortalWebClient.get()
                 .uri(uriBuilder -> uriBuilder
                         .path("/1613000/AptListService3/getTotalAptList3")
@@ -45,10 +42,28 @@ public class DataPortalApiService {
 
         if (response != null && response.isSuccess()) {
             return response.getItems().stream()
-                    .map(item -> objectMapper.convertValue(item, ApartmentDto.class))
+                    .map(item -> objectMapper.convertValue(item, ApartmentMasterDto.class))
                     .toList();
         }
         return List.of();
+    }
+
+    public ApartmentBasicDto getAptBasic(String kaptCode) {
+        DataPortalResponseDto<Object> response = defaultDataPortalWebClient.get()
+                .uri(uriBuilder -> uriBuilder
+                        .path("/1613000/AptBasisInfoServiceV3/getAphusBassInfoV3")
+                        .queryParam("serviceKey", encodingKey)
+                        .queryParam("kaptCode", kaptCode)
+                        .build()
+                )
+                .retrieve()
+                .bodyToMono(new ParameterizedTypeReference<DataPortalResponseDto<Object>>() {})
+                .block();
+
+        if (response != null && response.isSuccess()) {
+            return objectMapper.convertValue(response.getItem(), ApartmentBasicDto.class);
+        }
+        return new ApartmentBasicDto();
     }
 
     public ApartmentDetailDto getAptDetail(String kaptCode) {

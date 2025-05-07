@@ -21,19 +21,19 @@ public class ApartmentDetailDto {
     private String kaptCode;  // 단지코드
     private String kaptName;  // 단지명
     private String codeMgr;  // 일반관리방식
-    private Integer kaptMgrCnt;  // 일반관리인원
+    private Double kaptMgrCnt;  // 일반관리인원
     private String kaptCcompany;  // 일반관리 계약업체
     private String codeSec;  // 경비관리방식
-    private Integer kaptdScnt;  // 경비관리인원
+    private Double kaptdScnt;  // 경비관리인원
     private String kaptdSecCom;  // 경비관리 계약업체
     private String codeClean;  // 청소관리방식
-    private Integer kaptdClcnt;  // 청소관리인원
+    private Double kaptdClcnt;  // 청소관리인원
     private String codeGarbage;  // 음식물처리방법
     private String codeDisinf;  // 소독관리방식
     private Integer kaptdDcnt;  // 소독관리 연간 소독횟수
     private String disposalType;  // 소독방법
     private String codeStr;  // 건물구조
-    private Integer kaptdEcapa;  // 수전용량
+    private Double kaptdEcapa;  // 수전용량
     private String codeEcon;  // 세대전기계약방식
     private String codeEmgr;  // 전기안전관리자법정선임여부
     private String codeFalarm;  // 화재수신반방식
@@ -43,7 +43,7 @@ public class ApartmentDetailDto {
     private Integer kaptdPcnt;  // 주차대수(지상)
     private Integer kaptdPcntu;  // 주차대수(지하)
     private String codeNet;  // 주차관제.홈네트워크
-    private Integer kaptdCccnt;  // CCTV대수
+    private Double kaptdCccnt;  // CCTV대수
     private String welfareFacility;  // 부대.복리시설
     private String kaptdWtimebus;  // 버스정류장 거리
     private String subwayLine;  // 지하철호선
@@ -51,12 +51,12 @@ public class ApartmentDetailDto {
     private String kaptdWtimesub;  // 지하철역 거리
     private String convenientFacility;  // 편의시설
     private String educationFacility;  // 교육시설
-    private Integer groundElChargerCnt;  // 지상 전기차 충전대수
-    private Integer undergroundElChargerCnt;  // 지하 전기차 충전대수
+    private Double groundElChargerCnt;  // 지상 전기차 충전대수
+    private Double undergroundElChargerCnt;  // 지하 전기차 충전대수
 
     public ApartmentDetail toEntity(ApartmentMaster master) {
         return ApartmentDetail.builder()
-                .apartmentMaster(master)
+                /*.apartmentMaster(master)*/
                 .kaptCode(this.kaptCode)
                 .kaptName(this.kaptName)
                 .codeMgr(this.codeMgr)

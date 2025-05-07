@@ -40,6 +40,6 @@ public class ApartmentMaster {
     @Column(name = "bjd_code", length = 10, nullable = false)
     private String bjdCode;
 
-    @OneToOne(mappedBy = "apartmentMaster", cascade = CascadeType.ALL)
-    private ApartmentDetail apartmentDetail;
+    /*@OneToOne(mappedBy = "apartmentMaster", cascade = CascadeType.ALL)
+    private ApartmentDetail apartmentDetail;*/
 }
