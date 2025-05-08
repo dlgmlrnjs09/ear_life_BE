@@ -1,6 +1,7 @@
 package com.earlife.apartment.main.domain.api.apartment.controller;
 
 import com.earlife.apartment.main.domain.api.apartment.facade.ApartmentFacade;
+import com.earlife.apartment.main.domain.api.apartment.service.ApartmentRegisterService;
 import com.earlife.apartment.main.domain.api.apartment.service.ApartmentService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,24 +16,26 @@ public class ApartmentController {
     private final ApartmentService apartmentService;
     private final ApartmentFacade apartmentFacade;
 
-    @GetMapping("/list")
-    public void insertAllApartment() {
-        apartmentService.insertAllApartment();
-    }
-
-    @GetMapping("/basic")
-    public void insertBasicApartment() {
-        apartmentService.insertApartmentBasic();
-    }
-
     @GetMapping("/detail")
     public void insertApartmentDetail() {
-        apartmentService.insertApartmentDetail();
+//        apartmentService.insertApartmentDetail();
     }
 
     @GetMapping("/total")
     @ResponseBody
     public void insertTotalApartmentsInfo() {
+        apartmentFacade.insertTotalApartmentsInfo();
+    }
+
+    @GetMapping("/deleteAll")
+    @ResponseBody
+    public void deleteAllApartments() {
+        apartmentFacade.deleteAll();
+    }
+
+    @GetMapping("/test")
+    @ResponseBody
+    public void test() {
         apartmentFacade.insertTotalApartmentsInfo();
     }
 }

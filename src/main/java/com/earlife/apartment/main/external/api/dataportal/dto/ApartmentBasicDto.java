@@ -50,7 +50,7 @@ public class ApartmentBasicDto {
     private Integer kaptdEcntp;
     private String zipcode;
 
-    public ApartmentBasic toEntity(ApartmentMaster master) {
+    public ApartmentBasic toEntity() {
         return ApartmentBasic.builder()
                 /*.apartmentMaster(master)*/
                 .kaptCode(this.kaptCode)

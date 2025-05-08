@@ -9,7 +9,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class DataPortalResponseDto<T> {
+public class ApartmentResItemsDto<T> {
 
     private Response<T> response;
 
@@ -42,28 +42,8 @@ public class DataPortalResponseDto<T> {
     @ToString
     public static class Body<T> {
         private List<T> items;
-        private T item;
         private String numOfRows;
         private String pageNo;
         private String totalCount;
-    }
-
-    public boolean isSuccess() {
-        return response != null &&
-                response.header != null &&
-                "00".equals(response.header.getResultCode());
-    }
-
-    public List<T> getItems() {
-        if (response != null &&
-                response.body != null &&
-                response.body.getItems() != null) {
-            return response.body.getItems();
-        }
-        return List.of();
-    }
-
-    public T getItem() {
-        return response.body.getItem();
     }
 }

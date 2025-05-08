@@ -54,7 +54,7 @@ public class ApartmentDetailDto {
     private Double groundElChargerCnt;  // 지상 전기차 충전대수
     private Double undergroundElChargerCnt;  // 지하 전기차 충전대수
 
-    public ApartmentDetail toEntity(ApartmentMaster master) {
+    public ApartmentDetail toEntity() {
         return ApartmentDetail.builder()
                 /*.apartmentMaster(master)*/
                 .kaptCode(this.kaptCode)

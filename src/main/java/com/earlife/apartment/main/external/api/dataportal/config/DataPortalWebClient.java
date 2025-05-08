@@ -6,20 +6,24 @@ import io.netty.handler.ssl.SslContextBuilder;
 import io.netty.handler.ssl.util.InsecureTrustManagerFactory;
 import io.netty.handler.timeout.ReadTimeoutHandler;
 import io.netty.handler.timeout.WriteTimeoutHandler;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.client.reactive.ReactorClientHttpConnector;
 import org.springframework.stereotype.Component;
+import org.springframework.web.reactive.function.client.ExchangeFilterFunction;
 import org.springframework.web.reactive.function.client.WebClient;
 import org.springframework.web.util.DefaultUriBuilderFactory;
+import reactor.core.publisher.Mono;
 import reactor.netty.http.client.HttpClient;
 
 import javax.net.ssl.SSLException;
 import java.util.concurrent.TimeUnit;
 
 @Component
+@Slf4j
 public class DataPortalWebClient {
 
     private final String BASE_URL = "https://apis.data.go.kr";
@@ -39,7 +43,6 @@ public class DataPortalWebClient {
                         .addHandlerLast(new WriteTimeoutHandler(30, TimeUnit.SECONDS)))
                 .secure(t -> t.sslContext(sslContext));
 
-        // URI 인코딩 모드 설정 - 여기가 중요합니다
         DefaultUriBuilderFactory factory = new DefaultUriBuilderFactory(BASE_URL);
         factory.setEncodingMode(DefaultUriBuilderFactory.EncodingMode.VALUES_ONLY);
 
@@ -48,6 +51,18 @@ public class DataPortalWebClient {
                 .clientConnector(new ReactorClientHttpConnector(httpClient))
                 .defaultHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
                 .defaultHeader(HttpHeaders.ACCEPT, MediaType.APPLICATION_JSON_VALUE)
+                .filters(exchangeFilterFunctions -> {
+                    exchangeFilterFunctions.add(logRequest());
+                })
                 .build();
+    }
+
+    private ExchangeFilterFunction logRequest() {
+        return ExchangeFilterFunction.ofRequestProcessor(clientRequest -> {
+            log.info("DataPortal API Request: {} {}",
+                    clientRequest.method(),
+                    clientRequest.url());
+            return Mono.just(clientRequest);
+        });
     }
 }
